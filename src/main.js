@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
-import { createPinia } from 'pinia'
+import { createPinia } from "pinia";
 
 import "./assets/main.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -13,7 +13,7 @@ library.add(fab);
 import { far } from "@fortawesome/free-regular-svg-icons";
 library.add(far);
 
-createApp(App).use(router).mount('#app');
+createApp(App).component("font-awesome-icon", FontAwesomeIcon).use(createPinia()).use(router).mount('#app');
 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from 'firebase/firestore';
@@ -29,9 +29,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
-app.component("font-awesome-icon", FontAwesomeIcon);
-
-app.use(router);
-app.use(createPinia());
-
-app.mount("#app");
+export { app };

@@ -61,8 +61,6 @@ export default {
       const auth = getAuth();
       signInWithEmailAndPassword(auth, this.email, this.password)
         .then(() => {
-          this.$router.push("/profile");
-          this.$router.push("/navbar");
           this.$router.push("/home");
         })
         .catch((error) => {

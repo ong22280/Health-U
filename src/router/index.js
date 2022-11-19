@@ -14,7 +14,7 @@ const router = createRouter({
       path: "/register",
       name: "register",
       component: () =>
-        import(/* webpackChunkName: "about" */ "../views/RegisterView.vue"),
+        import("../views/RegisterView.vue"),
     },
     {
       path: "/home",
