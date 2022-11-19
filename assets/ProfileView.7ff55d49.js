@@ -1,1 +1,0 @@
-import{_ as o,N as a,r as n,o as r,a as t,f as s}from"./index.126dfbfd.js";const c={components:{Navbar:a}};function p(_,f,l,i,m,d){const e=n("Navbar");return r(),t("div",null,[s(e)])}const v=o(c,[["render",p]]);export{v as default};
