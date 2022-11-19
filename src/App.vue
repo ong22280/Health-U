@@ -1,8 +1,8 @@
 <template>
-  <div class="bg-green-400 h-screen">
-    <Navbar />
+  <div >
+
   </div>
-  <router-view id="content" />
+  <router-view />
 </template>
 
 <script>
@@ -27,6 +27,13 @@ export default {
   padding: 4rem 4rem;
   border-radius: 5px;
   background: #fefefe;
+}
+body  {
+  background-image: url("./assets/images/bg-food.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 .background {
   width: 100vw;

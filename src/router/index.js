@@ -20,7 +20,34 @@ const router = createRouter({
       path: "/home",
       name: "home",
       component: () =>
-        import(/* webpackChunkName: "about" */ "../views/HomeView.vue"),
+        import("../views/HomeView.vue"),
+      meta: {
+        authRequired: true,
+      },
+    },
+    {
+      path: "/profile",
+      name: "profile",
+      component: () =>
+        import("../views/ProfileView.vue"),
+      meta: {
+        authRequired: true,
+      },
+    },
+    {
+      path: "/blog",
+      name: "blog",
+      component: () =>
+        import("../views/BlogView.vue"),
+      meta: {
+        authRequired: true,
+      },
+    },
+    {
+      path: "/navbar",
+      name: "navbar",
+      component: () =>
+        import("../components/Navbar.vue"),
       meta: {
         authRequired: true,
       },

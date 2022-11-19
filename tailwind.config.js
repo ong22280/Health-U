@@ -7,6 +7,10 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      backgroundImage: {
+        'hero-pattern': "url('./src/assets/images/bg-food.jpg')",
+        'footer-texture': "url('./src/assets/images/bg-food.jpg')",
+      },
       keyframes: {
         wiggle: {
           "0%, 100%": { transform: "rotate(-3deg)" },

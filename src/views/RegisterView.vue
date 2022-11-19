@@ -1,7 +1,7 @@
 <template>
-  <div class="container" style="width: 500px">
+  <div class="container shadow-2xl " id="content" style="width: 500px">
     <form @submit.prevent="register">
-      <h2 class="mb-3">Register</h2>
+      <h2 class="mb-3 text-3xl text-center">Register</h2>
       <div class="input">
         <label for="email">Email address</label>
         <input
