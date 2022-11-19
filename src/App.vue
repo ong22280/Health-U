@@ -1,19 +1,17 @@
 <template>
-  <div class="background"></div>
-  <div class="navbar">
-    <nav class="nav">
-      <div class="nav-el" id="name_project">
-        <img src="./assets/images/logo.png" width="30" class="me-2" alt="" />
-        Vue Firebase Authentication
-      </div>
-    </nav>
+  <div class="bg-green-400 h-screen">
+    <Navbar />
   </div>
   <router-view id="content" />
 </template>
 
 <script>
+import Navbar from './components/Navbar.vue';
 export default {
   name: "App",
+  components: {
+    Navbar
+  }
 };
 </script>
 
@@ -59,7 +57,6 @@ export default {
   font-weight: 700;
 }
 .container {
-  width: 400px;
   max-width: 95%;
 }
 .input {

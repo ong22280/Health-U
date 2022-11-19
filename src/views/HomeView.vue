@@ -10,9 +10,7 @@
 
 <script>
 import { getAuth } from "firebase/auth";
-
 const auth = getAuth();
-
 export default {
   data() {
     return {

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" style="width: 500px">
     <form @submit.prevent="register">
       <h2 class="mb-3">Register</h2>
       <div class="input">
@@ -87,3 +87,6 @@ export default {
   },
 };
 </script>
+
+<style>
+</style>

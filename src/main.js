@@ -29,9 +29,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
-
-
-
 app.component("font-awesome-icon", FontAwesomeIcon);
 
 app.use(router);
