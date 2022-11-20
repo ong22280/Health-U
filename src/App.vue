@@ -21,7 +21,7 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   border: 1px solid lightgray;
-  padding: 4rem 4rem;
+  padding: 3rem 2rem;
   border-radius: 5px;
   background: #fefefe;
 }
@@ -61,7 +61,7 @@ body  {
   font-weight: 700;
 }
 .container {
-  max-width: 95%;
+  max-width: 80%;
 }
 .input {
   display: flex;
@@ -115,6 +115,49 @@ body  {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.fade-in{
+  animation: fade 1s;
+}
+@keyframes fade {
+  0% {
+    transform: translateX(-50%);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-charcter
+{
+   text-transform: uppercase;
+  background-image: linear-gradient(
+    -225deg,
+    #000 0%,
+    #083100 29%,
+    #009011 50%,
+    #083100 67%,
+    #000 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 8s linear infinite;
+  display: inline-block;
+      font-size: 190px;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
 }
 
 </style>

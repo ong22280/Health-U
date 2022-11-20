@@ -1,7 +1,13 @@
 <template>
-  <div class="container shadow-2xl" id="content" style="width: 500px">
+  <dir class="justify-center"></dir>
+  <div class="container shadow-2xl fade-in" id="content" style="width: 500px">
+    <div class="text-center">
+      <p class="animate-charcter text-4xl pb-4 font-serif font-black">
+        HEALTH-U
+      </p>
+    </div>
     <form @submit.prevent="login">
-      <h2 class="mb-3 text-3xl text-center ">Login</h2>
+      <h2 class="mb-3 text-3xl text-center">Login</h2>
       <div class="input">
         <label for="email">Email address</label>
         <input
@@ -81,15 +87,4 @@ export default {
 };
 </script>
 
-<style scoped>
-#content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 1px solid lightgray;
-  padding: 4rem 4rem;
-  border-radius: 5px;
-  background: #fefefe;
-}
-</style>
+<style scoped></style>
