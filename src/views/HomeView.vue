@@ -2,22 +2,24 @@
   <Navbar/>
   <div class="flex-col">
   <div>
-    <p class="text-white text-3xl ml-10">What's on menu today?</p>
+    <p class="text-white text-4xl ml-20 p-9">What's on menu today?</p>
   </div>
-  <div class="p-52 bg-white">
-  <p class="text-white">Hello Hello</p>
+  <div class="flex justify-center">
+    <Food/>
   </div>
-  <div>
-    <p class="text-white">not on menu??</p>
+  <div class="text-end">
+    <router-link to="/custom" class="text-white text-2xl mr-10">not on menu?</router-link>
   </div>
   </div>
 </template>
 
 <script>
 import Navbar from "../components/Navbar.vue";
+import Food from "../components/Food.vue";
 export default {
   components: {
     Navbar,
+    Food,
   },
 };
 
