@@ -1,9 +1,15 @@
 <template>
+  <Navbar/>
+  <div class="flex-col">
   <div>
-    <Navbar />
-    <div class="flex flex-wrap m-9">
-      <p class="title shadow-2xl">food</p>
-    </div>
+    <p class="text-white text-3xl ml-10">What's on menu today?</p>
+  </div>
+  <div class="p-52 bg-white">
+  <p class="text-white">Hello Hello</p>
+  </div>
+  <div>
+    <p class="text-white">not on menu??</p>
+  </div>
   </div>
 </template>
 
