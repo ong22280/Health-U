@@ -7,8 +7,8 @@
   <div class="flex justify-center">
     <Food/>
   </div>
-  <div class="text-end">
-    <router-link to="/custom" class="text-white text-2xl mr-10">not on menu?</router-link>
+  <div class="text-center mt-2">
+    <router-link to="/custom" class="text-white text-2xl">not on menu?</router-link>
   </div>
   </div>
 </template>
