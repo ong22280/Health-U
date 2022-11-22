@@ -25,15 +25,6 @@
           placeholder="password123"
         />
       </div>
-      <div class="input">
-        <label for="bio">IBM</label>
-        <input
-          class="form-control"
-          type="text"
-          name="bio"
-          placeholder="your IBM"
-        />
-      </div>
 
       <div class="alternative-option mt-4">
         Already have an account? <span @click="moveToLogin">Login</span>
@@ -47,7 +38,6 @@
         role="alert"
         id="alert_2"
       >
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit.
         <button
           type="button"
           class="btn-close"
@@ -68,16 +58,15 @@ import {
   onSnapshot,
   updateDoc,
   doc,
+  setDoc,
   query,
   orderBy,
 } from "firebase/firestore";
-
 export default {
   data() {
     return {
       email: "",
       password: "",
-      bio: "",
     };
   },
   methods: {
@@ -88,7 +77,6 @@ export default {
       const auth = getAuth();
       const email = document.querySelector("input[name=email]").value;
       const password = document.querySelector("input[name=password]").value;
-      const bio = document.querySelector("input[name=bio]").value;
       try {
         const userCredential = await createUserWithEmailAndPassword(
           auth,
@@ -96,13 +84,10 @@ export default {
           password
         );
         const user = userCredential.user;
-        const docRef = await addDoc(collection(db, "users"), {
+        await setDoc(doc(db, "users", user.uid), {
           email: email,
-          bio: bio,
-          uid: user.uid,
         });
-        console.log("Document written with ID: ", docRef.id);
-        this.$router.push("/home");
+        this.$router.push("/userDetail");
       } catch (error) {
         const errorCode = error.code;
         const errorMessage = error.message;

@@ -130,6 +130,18 @@ body  {
   }
 }
 
+.fade-normal{
+  animation: fade-normal 1s;
+}
+@keyframes fade-normal {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .animate-charcter
 {
    text-transform: uppercase;
@@ -146,7 +158,6 @@ body  {
   background-size: 200% auto;
   color: #fff;
   background-clip: text;
-  text-fill-color: transparent;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: textclip 8s linear infinite;

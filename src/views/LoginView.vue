@@ -1,5 +1,4 @@
 <template>
-  <dir class="justify-center"></dir>
   <div class="container shadow-2xl fade-in" id="content" style="width: 500px">
     <div class="text-center">
       <p class="animate-charcter text-4xl pb-4 font-serif font-black">
@@ -37,7 +36,6 @@
         role="alert"
         id="alert_1"
       >
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit.
         <button
           type="button"
           class="btn-close"
