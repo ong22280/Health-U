@@ -52,6 +52,11 @@ const router = createRouter({
       //   authRequired: true,
       // },
     },
+    {
+      path: "/custom",
+      name: "custom",
+      component: ()=> import("../views/CustomMenu.vue"),
+    },
   ],
 });
 
