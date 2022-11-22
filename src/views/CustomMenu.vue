@@ -27,7 +27,7 @@
             name="submit" 
             id=""
             value="Submit"
-            class="px-5 py-3 bg-gray-200 rounded-md"/>
+            class="px-5 py-3 bg-gray-200 rounded-md scale-100 shadow-sm hover:scale-105"/>
             </div>
         </div>
     </div>
