@@ -23,7 +23,7 @@
               <router-link to="/profile" class="text-2xl font-serif text-white">PROFILE</router-link>
             </li>
             <li>
-              <router-link to="/blog" class="text-2xl font-serif text-white ">HISTORY</router-link>
+              <router-link to="/history" class="text-2xl font-serif text-white ">HISTORY</router-link>
             </li>
           </ul>
         </div>

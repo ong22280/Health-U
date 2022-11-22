@@ -160,7 +160,7 @@ body  {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: textclip 8s linear infinite;
+  animation: textclip 3s linear infinite;
   display: inline-block;
       font-size: 190px;
 }

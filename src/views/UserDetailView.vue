@@ -4,7 +4,7 @@
             <h2 class="mb-3 text-3xl text-center">You information</h2>
 
             <div class="input">
-                <label for="age">Age {{ age }}</label>
+                <label for="age">Age</label>
                 <input class="form-control" type="number" v-model="age" name="age" />
             </div>
 
@@ -45,7 +45,7 @@
                 <label for="seafood">Seafood</label><br />
             </div>
 
-            <button type="submit" id="register_button" class="mt-4 btn-pers">
+            <button type="submit" id="register_button" class="mt-4 btn-pers" @click="BMR">
                 Done
             </button>
         </form>
@@ -73,11 +73,19 @@ export default {
             weight: "",
             gender: "",
             dontWantFood: [],
+            myCalorie: 0,
         };
     },
     methods: {
         moveToLogin() {
             this.$router.push("/");
+        },
+        BMR() {
+            if (this.gender == "Men") {
+                this.myCalorie = 66 + (13.7 * this.weight) + (5 * this.height) - (6.8 * this.age);
+            } else {
+                this.myCalorie = 655 + (9.6 * this.weight) + (1.8 * this.height) - (4.7 * this.age);
+            }
         },
         async pushInformation() {
             // push add field information to database
@@ -89,28 +97,11 @@ export default {
                 weight: this.weight,
                 gender: this.gender,
                 dontWantFood: this.dontWantFood,
+                myCalorie: this.myCalorie,
             });
             this.$router.push("/home");
         },
     },
-    // computed: {
-    //     age() {
-    //         return this.$store.state.age;
-    //     },
-    //     height() {
-    //         return this.$store.state.height;
-    //     },
-    //     weight() {
-    //         return this.$store.state.weight;
-    //     },
-    //     BMR() {
-    //         if (this.gender == "Men") {
-    //             return 66 + 13.7 * this.weight + 5 * this.height - 6.8 * this.age;
-    //         } else {
-    //             return 655 + 9.6 * this.weight + 1.8 * this.height - 4.7 * this.age;
-    //         }
-    //     },
-    // },
 };
 </script>
 
