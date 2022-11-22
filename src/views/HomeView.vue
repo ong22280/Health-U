@@ -19,17 +19,17 @@
 <script>
 import Navbar from "../components/Navbar.vue";
 import Food from "../components/Food.vue";
-import {uploadToFirebase} from "../upload.js";
+// import {uploadToFirebase} from "../upload.js";
 export default {
   components: {
     Navbar,
     Food,
   },
-  methods: {
-    async upload(){
-      await uploadToFirebase()
-    }
-  }
+  // methods: {
+  //   async upload(){
+  //     await uploadToFirebase()
+  //   }
+  // }
 
 };
 

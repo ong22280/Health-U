@@ -8,7 +8,7 @@
   </p>
 
   <div v-for="food in trackFoods" :key="food.id" class="mb-12">
-    <div class=" container shadow-2xl rounded-xl fade-normal" id="content-history" style="width: 48rem;">
+    <div class=" container shadow-2xl rounded-xl fade-in" id="content-history" style="width: 48rem;">
       <img :src="food.image" class="card-img-top rounded-xl shadow-2xl">
       <div class="card-body">
         <h5 class="card-title font-black text-3xl">{{ food.name }}</h5>
@@ -16,16 +16,7 @@
         <span class="font-semibold text-2xl">{{ food.calorie }}</span>
       </div>
     </div>
-
   </div>
-
-
-
-
-
-  <!-- <div v-for="food in trackFoods" :key="food.id">
-      {{ food.name }}
-    </div> -->
 
 </template>
   
@@ -76,7 +67,7 @@ export default {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: textclip 1s linear infinite;
+  animation: textclip 3s linear infinite;
 }
 
 @keyframes textclip {
