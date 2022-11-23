@@ -8,17 +8,21 @@
             <label for="protein" class="text-xl">Protein</label>
             <input 
             type="text" 
-            class="block bg-gray-100 rounded-md text-lg mb-5 py-3 px-5 shadow-sm"
+            class="inputTextField"
             name="protein"
             />
+            <select name="" id="" multiple>
+                <option value="1">one</option>
+                <option value="2">two</option>
+            </select>
             <label for="carb" class="text-xl">Carbohydrate</label>
             <input type="text" 
-            class="block bg-gray-100 rounded-md text-lg mb-5 py-3 px-5 shadow-sm"
+            class="inputTextField"
             name="carb"
             />
             <label for="fat" class="text-xl">Fat</label>
             <input type="text" 
-            class="block bg-gray-100 rounded-md text-lg mb-5 py-3 px-5 shadow-sm"
+            class="inputTextField"
             name="fat"
             />
             <div class="flex justify-end">
@@ -44,5 +48,10 @@ export default {
 </script>
 
 <style>
+home-btn{
+    @apply
+    px-0
+    py-3
+}
 
 </style>
