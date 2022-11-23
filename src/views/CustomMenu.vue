@@ -25,7 +25,7 @@
             <!-- <VueMultiselect 
             v-model="selected"
             :options="options"/> -->
-            <!-- <multiselect v-model="selected" :options="options"></multiselect> -->
+            <Multiselect :options="options"/>
             </div>
             <label for="carb" class="text-xl">Carbohydrate</label>
             <input type="text" 
@@ -53,6 +53,7 @@
 <script>
 import Navbar from "../components/Navbar.vue"
 import Multiselect from 'vue-multiselect'
+
 export default {
     components:{
     Navbar,
