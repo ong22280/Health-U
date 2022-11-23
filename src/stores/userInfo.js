@@ -7,6 +7,8 @@ export const useUserInfoStore = defineStore("users", {
   state: () => ({
     informationUser: [],
     trackFood: [],
+    likeFood: [],
+    allergic: [],
   }),
   getters: {
     getInformationUser: (state) => {
@@ -22,6 +24,8 @@ export const useUserInfoStore = defineStore("users", {
         if (doc.id === auth.currentUser.uid) {
           this.informationUser = doc.data();
           this.trackFood = doc.data().trackFood;
+          this.likeFood = doc.data().likeFood;
+          this.allergic = doc.data().allergic;
         }
       });
     },
