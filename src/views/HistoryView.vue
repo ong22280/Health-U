@@ -6,6 +6,7 @@
   <p class="flex justify-center shadow-9xl animate-charcter-history text-5xl pt-4 font-black ">
     Your track
   </p>
+<div class="center">
 
   <div v-for="food in trackFoods" :key="food.id" class="mb-12">
     <div class=" container shadow-2xl rounded-xl fade-in" id="content-history" style="width: 48rem;">
@@ -17,6 +18,7 @@
       </div>
     </div>
   </div>
+</div>
 
 </template>
   
@@ -74,5 +76,12 @@ export default {
   to {
     background-position: 200% center;
   }
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 </style>
