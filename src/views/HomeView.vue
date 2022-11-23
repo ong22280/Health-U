@@ -1,19 +1,29 @@
 <template>
-  <Navbar />
+
+  <div>
+    <Navbar />
+  </div>
+  <div class="flex justify-center mx-10">
+
+    <p class=" shadow-9xl animate-charcter-history text-5xl pt-4 font-black ">
+      What's on menu today?
+    </p>
+
+  </div>
   <div class="flex-col">
-    <div>
-      <p class="text-white text-5xl ml-16 my-3">What's on menu today?</p>
+
+    <div class="flex justify-center flex-col">
+      <Food @click="incrementI" class="mb-12 flex justify-center" 
+        :name="foods[i].name" 
+        :calorie="foods[i].calorie"
+        :image="foods[i].image"
+      ></Food>
     </div>
 
-        <Food v-for="food in foods" :key="food.id" class="mb-12 flex justify-center" :name="food.name" :calorie="food.calorie"
-          :image="food.image">
-        </Food>
+
 
     <div class="text-center mt-2 scale-100 hover:scale-105 text-2xl text-white">
       <router-link to="/custom" class="hover:text-green-500">not on menu?</router-link>
-    </div>
-    <div>
-      <!-- <input type="submit" class="p-10 bg-red-500" :onclick="upload" > -->
     </div>
   </div>
 </template>
@@ -22,7 +32,7 @@
 import { useFoodStore } from "../stores/randFood.js";
 import Navbar from "../components/Navbar.vue";
 import Food from "../components/Food.vue";
-// import {uploadToFirebase} from "../upload.js";
+
 export default {
   components: {
     Navbar,
@@ -31,26 +41,62 @@ export default {
   data() {
     return {
       foods: [],
-      count: 0,
+      i: 0,
     };
   },
-  async mounted() {
+  async created() {
     await useFoodStore().fetchFood();
     this.foods = useFoodStore().getRandFood;
-    console.log(this.foods[1].name);
+    console.log(this.foods[0].name);
   },
-  // methods: {
-  //   async upload(){
-  //     await uploadToFirebase()
-  //   }
-  // }
+  methods: {
+    incrementI() {
+      this.i = this.i + 1
+    },
+  },
 };
 </script>
 
+
+
+
 <style scoped>
-.title {
-  font-size: 40px;
-  font-weight: 700;
+#swiper {
+  height: 70vh;
+  aspect-ratio: 2 / 3;
+  perspective: 1000px;
+  perspective-origin: center 50%;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.animate-charcter-history {
+  text-transform: uppercase;
+  background-image: linear-gradient(-225deg,
+      #fff 0%,
+      #fff 29%,
+      #00FF1E 50%,
+      #fff 67%,
+      #fff 100%);
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
   color: #fff;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 3s linear infinite;
+}
+
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
