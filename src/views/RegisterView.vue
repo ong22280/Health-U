@@ -92,6 +92,11 @@ export default {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
+        let alert_2 = document.querySelector("#alert_2")
+          alert_2.classList.remove("d-none");
+          alert_2.innerHTML = errorMessage;
+          console.log(alert_2);       
+
       }
     },
   },

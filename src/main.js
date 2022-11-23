@@ -17,6 +17,10 @@ createApp(App).component("font-awesome-icon", FontAwesomeIcon).use(createPinia()
 
 import { initializeApp } from "firebase/app";
 import { getFirestore } from 'firebase/firestore';
+
+
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyA9F9VSha2ecdcuJBBU1_tZDopqjPj8Bvo",
   authDomain: "health-u-4ff8d.firebaseapp.com",
