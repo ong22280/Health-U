@@ -51,10 +51,10 @@ export default {
     this.likeFood = trackFoodStore().trackFood
     console.log("this list is empty: ", this.likeFood)
   },
-  async mounted() {
-    // await trackFoodStore().fetchTrackFood(this.fetchTrackFoodFromUser);
-    // this.trackFoods = trackFoodStore().trackFood;
-  },
+  // async mounted() {
+  //   await trackFoodStore().fetchTrackFood(this.fetchTrackFoodFromUser);
+  //   this.trackFoods = trackFoodStore().trackFood;
+  // },
 };
 </script>
 
