@@ -24,6 +24,7 @@
   
 <script>
 import { trackFoodStore } from '../stores/trackFood.js';
+import { useUserInfoStore } from '../stores/userInfo'
 import Navbar from '../components/Navbar.vue';
 export default {
   components: {
@@ -32,11 +33,27 @@ export default {
   data() {
     return {
       trackFoods: [],
+      fetchTrackFoodFromUser: [],
+      fetchLikeFoodFromUser: [],
+      likeFood: [],
     };
   },
+  async created() {
+    await useUserInfoStore().fetchInformationUser()
+    this.user = useUserInfoStore().informationUser
+
+    this.fetchTrackFoodFromUser = this.user.trackFood
+    await trackFoodStore().fetchTrackFood(this.fetchTrackFoodFromUser)
+    this.trackFoods = trackFoodStore().trackFood
+
+    this.fetchLikeFoodFromUser = this.user.likeFood
+    await trackFoodStore().fetchTrackFood(this.fetchLikeFoodFromUser)
+    this.likeFood = trackFoodStore().trackFood
+    console.log("this list is empty: ", this.likeFood)
+  },
   async mounted() {
-    await trackFoodStore().fetchTrackFood();
-    this.trackFoods = trackFoodStore().getTrackFood;
+    // await trackFoodStore().fetchTrackFood(this.fetchTrackFoodFromUser);
+    // this.trackFoods = trackFoodStore().trackFood;
   },
 };
 </script>
