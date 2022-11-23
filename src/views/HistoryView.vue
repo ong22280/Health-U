@@ -7,13 +7,15 @@
     Your track
   </p>
 
-  <div v-for="food in trackFoods" :key="food.id" class="mb-12">
-    <div class=" container shadow-2xl rounded-xl fade-in" id="content-history" style="width: 48rem;">
-      <img :src="food.image" class="card-img-top rounded-xl shadow-2xl">
-      <div class="card-body">
-        <h5 class="card-title font-black text-3xl">{{ food.name }}</h5>
-        <span class="font-bold text-2xl">calorie : </span>
-        <span class="font-semibold text-2xl">{{ food.calorie }}</span>
+  <div class="flex-col justify-center">
+    <div v-for="food in trackFoods" :key="food.id" class="mb-12 flex justify-center">
+      <div class=" container  shadow-2xl rounded-xl fade-in" id="content-history" style="width: 48rem; max-width: 80%;">
+        <img :src="food.image" class="card-img-top rounded-xl shadow-2xl w-full">
+        <div class="">
+          <h5 class="card-title font-black text-3xl">{{ food.name }}</h5>
+          <span class="font-bold text-2xl">calorie : </span>
+          <span class="font-semibold text-2xl">{{ food.calorie }}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -30,7 +32,6 @@ export default {
   },
   data() {
     return {
-      informationUser: [],
       trackFoods: [],
       fetchTrackFoodFromUser: [],
       fetchLikeFoodFromUser: [],
@@ -50,10 +51,10 @@ export default {
     this.likeFood = trackFoodStore().trackFood
     console.log("this list is empty: ", this.likeFood)
   },
-  async mounted() {
-    // await trackFoodStore().fetchTrackFood(this.fetchTrackFoodFromUser);
-    // this.trackFoods = trackFoodStore().trackFood;
-  },
+  // async mounted() {
+  //   await trackFoodStore().fetchTrackFood(this.fetchTrackFoodFromUser);
+  //   this.trackFoods = trackFoodStore().trackFood;
+  // },
 };
 </script>
 
@@ -88,5 +89,11 @@ export default {
   to {
     background-position: 200% center;
   }
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import { collection, getDocs, query } from "firebase/firestore";
 import { db } from "../main.js";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useUserInfoStore } from "./userInfo.js";
 
 // await useUserInfoStore().fetchInformationUser();
