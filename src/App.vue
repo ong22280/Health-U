@@ -22,7 +22,7 @@ export default {
   transform: translate(-50%, -50%);
   border: 1px solid lightgray;
   padding: 3rem 2rem;
-  border-radius: 5px;
+  border-radius: 15px;
   background: #fefefe;
 }
 body  {
@@ -73,7 +73,10 @@ body  {
 }
 .input > input {
   margin-top: 6px;
+  padding: 10px;
   height: 38px !important;
+  border: 1px solid #ccc;
+  border-radius: 7px;
 }
 /* From uiverse.io */
 .btn-pers {
