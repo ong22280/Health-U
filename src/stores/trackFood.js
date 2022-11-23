@@ -21,6 +21,7 @@ export const trackFoodStore = defineStore("foods", {
   },
   actions: {
     async fetchTrackFood() {
+      this.trackFood = [];
       const queryData = query(collection(db, "foods"));
       const querySnapshot = await getDocs(queryData);
       querySnapshot.forEach((doc) => {

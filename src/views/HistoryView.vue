@@ -3,7 +3,7 @@
     <Navbar />
   </div>
 
-  <p class="flex justify-center shadow-9xl animate-charcter-history text-5xl pt-4 font-black font-black ">
+  <p class="flex justify-center shadow-9xl animate-charcter-history text-5xl pt-4 font-black ">
     Your track
   </p>
 
