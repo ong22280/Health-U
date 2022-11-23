@@ -10,7 +10,7 @@
           </button>
         </div>
         <div class="min-h-fit w-[68%] bg-white">
-          <div class="relative left-[10%] top-[-15%] h-fit w-[70%] flex items-center space-x-[5%]">
+          <div class="relative left-[10%] top-[-10%] h-fit w-[70%] flex items-center space-x-[5%]">
             <div class="rounded-full bg-white max-w-[80%] max-h-[100%] border-slate-900 border-3 overflow-hidden">
               <img src="https://cdn.pixabay.com/photo/2021/02/10/16/55/lion-6002783_960_720.png" alt="Lion.png">
             </div>
@@ -19,6 +19,40 @@
             </div>
           </div>
           <div class="relative top-[-10%]">
+            <div class="flex flex-col items-center">
+              <div class="relative text-[20px]">
+                Personal Infomation
+              </div>
+              <div class=" bg-slate-400 h-fit w-[20%] p-[2%] rounded-lg">
+                <div class="text-white flex-col space-y-[3%]">
+                  <div class="shadow-lg flex p-[2%]">
+                    <div class="basis-1/2">
+                      Height : 
+                    </div>
+                    <div class="basis-1/2 text-right">
+                      175 cm
+                    </div>
+                  </div>
+                  <div class="shadow-lg flex p-[2%]">
+                    <div class="basis-1/2">
+                      Weight :
+                    </div>
+                    <div class="basis-1/2 text-right">
+                      68 kg
+                    </div>
+                  </div>
+                  <div class="shadow-lg flex p-[2%]">
+                    <div class="basis-1/2">
+                      BMI :
+                    </div>
+                    <div class="basis-1/2 text-right">
+                      20.5
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
             <div class="">
               <canvas id = "myChart" class="w-[50%]"></canvas>
             </div>
@@ -27,6 +61,9 @@
             </div>
             <div class="text-center text-[20px] mt-[25px]">
               Current Calories / Day :
+            </div>
+            <div class="text-center text-[20px] mt-[25px]">
+              Calories till reach target :
             </div>
           </div>
         </div>
