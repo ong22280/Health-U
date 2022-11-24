@@ -1,86 +1,208 @@
 <template>
-
   <div>
     <Navbar />
   </div>
   <div class="flex justify-center mx-10">
-
-    <p class=" shadow-9xl animate-charcter-history text-5xl pt-4 font-black ">
+    <p class="shadow-9xl animate-charcter-history text-5xl pt-4 font-black">
       What's on menu today?
     </p>
-
   </div>
   <div class="flex-col">
-
     <div class="flex justify-center flex-col">
-      <Food @click="incrementI" class="mb-12 flex justify-center" 
-        :name="foods[i].name" 
+      <Food
+        class="mb-12 flex justify-center fade-in"
+        :name="foods[i].name"
         :calorie="foods[i].calorie"
         :image="foods[i].image"
       ></Food>
-      <HelloWorld />
     </div>
 
+    <div class="bottom-position">
+      <div class="flex justify-evenly py-4">
+        <font-awesome-icon
+          class="text-5xl text-white pt-4 hover:scale-125 ease-in duration-100"
+          icon="fa-solid fa-thumbs-down"
+        />
+        <button
+          @click="skip"
+          class="button-beauty-skip text-white font-bold py-2 px-4 rounded-full"
+        >
+          SKIP
+        </button>
+        <button
+          @click="eat"
+          class="button-beauty-eat text-white font-bold py-2 px-4 rounded-full"
+        >
+          EAT
+        </button>
+        <font-awesome-icon
+          class="text-5xl text-white pt-2 hover:scale-125 ease-in duration-100"
+          icon="fa-solid fa-thumbs-up"
+        />
+      </div>
 
-
-    <div class="text-center mt-2 scale-100 hover:scale-105 text-2xl text-white">
-      <router-link to="/custom" class="hover:text-green-500">not on menu?</router-link>
+      <div class="flex justify-evenly p-1">
+        <div
+          class="text-center mt-2 text-2xl text-white font-bold py-2 px-4 rounded-full button-go-to-custom"
+        >
+          <router-link to="/custom" class="">not on menu?</router-link>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { useFoodStore } from "../stores/randFood.js";
-import HelloWorld from "../components/HelloWorld.vue";
+import { useUserInfoStore } from "../stores/userInfo.js";
 import Navbar from "../components/Navbar.vue";
 import Food from "../components/Food.vue";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { db } from "../main.js";
+import {
+  addDoc,
+  collection,
+  onSnapshot,
+  updateDoc,
+  doc,
+  setDoc,
+  query,
+  orderBy,
+} from "firebase/firestore";
 
 export default {
   components: {
     Navbar,
     Food,
-    HelloWorld,
   },
   data() {
     return {
       foods: [],
       i: 0,
+      age: "",
+      height: "",
+      weight: "",
+      gender: "",
+      allergic: [],
+      myCalorie: 0,
+      trackFood: [],
+      informationUser: [],
+      leftCalorie: 0,
     };
   },
   async created() {
+    await useUserInfoStore().fetchInformationUser();
+    this.informationUser = useUserInfoStore().informationUser;
+    this.myCalorie = this.informationUser.myCalorie;
+    this.leftCalorie = this.informationUser.leftCalorie;
+    console.log(this.myCalorie);
+
     await useFoodStore().fetchFood();
     this.foods = useFoodStore().getRandFood;
-    console.log(this.foods[0].name);
   },
   methods: {
-    incrementI() {
-      this.i = this.i + 1
+    skip() {
+      if (this.i < this.foods.length - 1) {
+        this.i++;
+      } else {
+        this.i = 0;
+      }
+    },
+    eat() {
+      console.log(this.foods[this.i].foodID);
+      this.trackFood.push(this.foods[this.i].foodID);
+      this.pushTrack();
+      if (this.i < this.foods.length - 1) {
+        this.i++;
+      } else {
+        this.i = 0;
+      }
+    },
+    async pushTrack() {
+      // push add field information to database
+      const auth = getAuth();
+      const user = auth.currentUser;
+      console.log(this.foods[this.i].calorie);
+      await updateDoc(doc(db, "users", user.uid), {
+        trackFood: this.trackFood,
+        leftCalorie: this.leftCalorie - this.foods[this.i].calorie,
+      });
+      //   trackFood: this.trackFood,
+
+      //   myCalorie: this.myCalorie - this.foods[this.i].calorie,
+      // });
+      // console.log(this.myCalorie);
+      // console.log(this.foods[this.i].calorie);
     },
   },
 };
 </script>
 
-
-
-
 <style scoped>
-#swiper {
-  height: 70vh;
-  aspect-ratio: 2 / 3;
-  perspective: 1000px;
-  perspective-origin: center 50%;
-  transform-style: preserve-3d;
-  position: relative;
+.bottom-position {
+  position: absolute;
+  bottom: 50px;
+  width: 100%;
+}
+
+.button-beauty-eat {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button-beauty-eat:hover {
+  background-color: #0e8e41;
+}
+
+.button-beauty-skip {
+  background-color: #f44336; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button-beauty-skip:hover {
+  background-color: #e60000;
+}
+
+.button-go-to-custom {
+  background-color: #007dff;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button-go-to-custom:hover {
+  background-color: #0058b1;
 }
 
 .animate-charcter-history {
   text-transform: uppercase;
-  background-image: linear-gradient(-225deg,
-      #fff 0%,
-      #fff 29%,
-      #00FF1E 50%,
-      #fff 67%,
-      #fff 100%);
+  background-image: linear-gradient(
+    -225deg,
+    #fff 0%,
+    #fff 29%,
+    #00ff1e 50%,
+    #fff 67%,
+    #fff 100%
+  );
   background-size: auto auto;
   background-clip: border-box;
   background-size: 200% auto;
@@ -95,11 +217,5 @@ export default {
   to {
     background-position: 200% center;
   }
-}
-
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 </style>

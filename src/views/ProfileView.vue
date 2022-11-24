@@ -58,10 +58,10 @@
             <canvas id="myChart" class="w-[50%]"></canvas>
           </div>
           <div class="mt-[30px] text-center text-[20px]">
-            Target Calories / Day :
+            Target Calories / Day : {{ informationUser.myCalorie }} kcal
           </div>
           <div class="text-center text-[20px] mt-[25px]">
-            Current Calories / Day :
+            Current Calories / Day : {{ informationUser.leftCalorie }} kcal
           </div>
           <div class="text-center text-[20px] mt-[25px]">
             Calories till reach target :

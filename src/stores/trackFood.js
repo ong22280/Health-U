@@ -3,11 +3,9 @@ import { collection, getDocs, query } from "firebase/firestore";
 import { db } from "../main.js";
 import { useUserInfoStore } from "./userInfo.js";
 
-// await useUserInfoStore().fetchInformationUser();
-// const informationUser = useUserInfoStore().informationUser;
-// console.log(informationUser);
-// const trackFoods = informationUser.trackFood;
-// console.log(trackFoods);
+await useUserInfoStore().fetchInformationUser();
+const informationUser = useUserInfoStore().informationUser;
+const trackFoods = informationUser.trackFood;
 
 export const trackFoodStore = defineStore("foods", {
   state: () => ({
@@ -19,12 +17,12 @@ export const trackFoodStore = defineStore("foods", {
     },
   },
   actions: {
-    async fetchTrackFood(foodList) {
+    async fetchTrackFood() {
       this.trackFood = [];
       const queryData = query(collection(db, "foods"));
       const querySnapshot = await getDocs(queryData);
       querySnapshot.forEach((doc) => {
-        if (foodList.includes(doc.id)) {
+        if (trackFoods.includes(doc.id)) {
           this.trackFood.push(doc.data());
         }
       });

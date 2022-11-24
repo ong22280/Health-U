@@ -16,15 +16,15 @@
         <div class="px-4">
           <ul :class="showMenu ? 'flex justify-end' : 'hidden'"
             class="flex-col space-y-4 md:flex md:space-y-0 md:flex-row md:items-center md:space-x-10 md:mt-0">
-            <li>
-              <router-link to="/home" class="text-2xl font-serif text-white">HOME</router-link>
-            </li>
+            <a href="/Health-U/home" class="text-2xl font-serif text-white">
+              HOME
+            </a>
             <li>
               <router-link to="/profile" class="text-2xl font-serif text-white">PROFILE</router-link>
             </li>
-            <li>
-              <router-link to="/history" class="text-2xl font-serif text-white ">HISTORY</router-link>
-            </li>
+            <a href="/Health-U/history" class="text-2xl font-serif text-white">
+              HISTORY
+            </a>
           </ul>
         </div>
       </nav>

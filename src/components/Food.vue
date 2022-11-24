@@ -1,10 +1,10 @@
 <template>
 
-    <div class="mb-12 flex justify-center">
+    <div class="mb-12 flex justify-center ">
 
-        <div class=" container  shadow-2xl rounded-xl fade-in" id="content-food"
-            style="width: 48rem; max-width: 80%;">
-            <img :src="image" class="card-img-top rounded-xl shadow-2xl w-full">
+        <div class="container shadow-2xl rounded-xl fade-in" id="content-food"
+            style="width: 32rem; max-width: 80%;">
+            <img :src="image" class="card-img-top rounded-xl shadow-2xl w-full h-96">
             <div class="">
                 <h5 class="card-title font-black text-3xl">{{ name }}</h5>
                 <span class="font-bold text-2xl">calorie : </span>
@@ -37,6 +37,14 @@ export default {
 </script>
 
 <style scoped>
+.container-food {
+  max-width: 80%;
+}
+
+.max-hight-image {
+    max-height: 500%;
+}
+
 #content-food {
   position: relative;
   top: 40px;
