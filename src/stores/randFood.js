@@ -22,13 +22,13 @@ export const useFoodStore = defineStore("foods", {
       const q = query(collection(db, "foods"));
       const querySnapshot = await getDocs(q);
       const queryData = querySnapshot.docs.map((doc) => doc.data());
-      console.log(queryData);
+      // console.log(queryData);
       queryData.forEach((doc) => {
         if (!allergic.includes(doc.name)) {
           this.foods.push(doc);
         }
       });
-      console.log(this.foods[0].name);
+      // console.log(this.foods[0].name);
     },
   },
 });

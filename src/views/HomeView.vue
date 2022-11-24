@@ -50,6 +50,48 @@
       </div>
     </div>
   </div>
+
+  <div
+    v-if="overCalorie"
+    class="fade-normal fixed"
+    id="content"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog relative w-auto pointer-events-none">
+      <div
+        class="modal-content relative flex flex-col w-full pointer-events-auto rounded-md outline-none text-current"
+      >
+        <div
+          class="modal-header flex flex-shrink-0 items-center justify-between p-4"
+        >
+          <h5 class="text-xl font-medium leading-normal" id="exampleModalLabel">
+            แคลอรี่เกินกว่าที่กำหนด
+          </h5>
+          <button
+            type="button"
+            class="btn-close box-content w-4 h-4 p-1 text-black border-none rounded-none opacity-50 focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div
+          class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t rounded-b-md"
+        >
+          <button
+            @click="accept"
+            type="button"
+            class="px-6 py-2.5 bg-purple-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -88,6 +130,7 @@ export default {
       trackFood: [],
       informationUser: [],
       leftCalorie: 0,
+      overCalorie: false,
     };
   },
   async created() {
@@ -95,12 +138,15 @@ export default {
     this.informationUser = useUserInfoStore().informationUser;
     this.myCalorie = this.informationUser.myCalorie;
     this.leftCalorie = this.informationUser.leftCalorie;
-    console.log(this.myCalorie);
+    console.log(this.leftCalorie);
 
     await useFoodStore().fetchFood();
     this.foods = useFoodStore().getRandFood;
   },
   methods: {
+    accept() {
+      this.overCalorie = false;
+    },
     skip() {
       if (this.i < this.foods.length - 1) {
         this.i++;
@@ -109,23 +155,30 @@ export default {
       }
     },
     eat() {
-      console.log(this.foods[this.i].foodID);
+    console.log("befor",this.leftCalorie);
+      if (this.leftCalorie - this.foods[this.i].calorie < 0) {
+        this.overCalorie = true;
+      }
       this.trackFood.push(this.foods[this.i].foodID);
+      console.log(this.trackFood);
       this.pushTrack();
       if (this.i < this.foods.length - 1) {
         this.i++;
       } else {
         this.i = 0;
       }
+      this.leftCalorie = this.leftCalorie - this.foods[this.i].calorie;
+      console.log("after",this.leftCalorie);
     },
+    
     async pushTrack() {
       // push add field information to database
       const auth = getAuth();
       const user = auth.currentUser;
-      console.log(this.foods[this.i].calorie);
+      console.log(this.leftCalorie);
       await updateDoc(doc(db, "users", user.uid), {
         trackFood: this.trackFood,
-        leftCalorie: this.leftCalorie - this.foods[this.i].calorie,
+        leftCalorie: this.leftCalorie,
       });
       //   trackFood: this.trackFood,
 
@@ -216,6 +269,18 @@ export default {
 @keyframes textclip {
   to {
     background-position: 200% center;
+  }
+}
+
+fade-out {
+  animation: fade-out 0.5s;
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 </style>
