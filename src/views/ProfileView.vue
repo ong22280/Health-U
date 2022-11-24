@@ -1,4 +1,5 @@
 <template>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
     <div>
       <Navbar />
     </div>
@@ -28,8 +29,8 @@
             <div class="relative text-[20px]">
               Personal Infomation
             </div>
-            <div class=" bg-slate-400 h-fit w-[20%] p-[2%] rounded-lg">
-              <div class="text-white flex-col space-y-[3%]">
+            <div class=" bg-slate-400 h-fit w-[20%] p-[2%] rounded-lg" @mouseover="showEditInfo(true)" @mouseleave="showEditInfo(false)">
+              <div id ="info" class="text-white flex-col space-y-[3%]">
                 <div class="shadow-lg flex p-[2%]">
                   <div class="basis-1/2">
                     Height :
@@ -56,24 +57,23 @@
                     </div>
                   </div>
                 </div>
-                <div id="editInfo" class="text-white flex-col d-none">
-                  <label for="name">Name :</label>
-                  <input type="text" name="name" value={{userName}} class="text-slate-500">
-                  <label for="height">Height :</label>
-                  <input type="number" name="height" value="{{this.height}}" class="text-slate-500">
-                  <label for="weight">Weight :</label>
-                  <input type="number" name="weight" value="{{this.weight}}" class="text-slate-500">
-                  <label for="bmi">BMI :</label>
-                  <input type="number" name="bmi" value="{{this.bmi}}" class="text-slate-500">
-                  <button class="bg-white text-slate-500 p-[2%] text-[75%] rounded-md mt-[4%]" @click="saveInfo()">Save</button>
-                </div>
-                <div id="showEditInfo" class="text-center pt-[3%] d-none">
-                    <button @click="editInfo()" id="editButton">
-                      <font-awesome-icon icon="fa-solid fa-user-pen" class=" hover:text-white"/>
-                    </button>
-                </div>
               </div>
-
+              <div id="editInfo" class="text-white flex-col d-none">
+                <label for="name">Name :</label>
+                <input type="text" name="name" value={{userName}} class="text-slate-500">
+                <label for="height">Height :</label>
+                <input type="number" name="height" value="{{this.height}}" class="text-slate-500">
+                <label for="weight">Weight :</label>
+                <input type="number" name="weight" value="{{this.weight}}" class="text-slate-500">
+                <label for="bmi">BMI :</label>
+                <input type="number" name="bmi" value="{{this.bmi}}" class="text-slate-500">
+                <button class="bg-white text-slate-500 p-[2%] text-[75%] rounded-md mt-[4%]" @click="saveInfo()">Save</button>
+              </div>
+              <div id="showEditInfo" class="text-center pt-[3%] d-none">
+                  <button @click="editInfo()" id="editButton">
+                    <font-awesome-icon icon="fa-solid fa-user-pen" class=" hover:text-black"/>
+                  </button>
+              </div>
             </div>
           </div>
           <div class="">
@@ -93,7 +93,6 @@
         
       </div>
     </div>
-
 </template>
 
 <script>
@@ -264,6 +263,7 @@ export default {
 </script>
 
 <style>
+
 :root {
   --theme: rgb(148, 163, 184);
 }
