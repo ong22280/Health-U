@@ -3,42 +3,52 @@
     <Navbar />
   </div>
   <div class="flex justify-center mx-10">
-    <p class="shadow-9xl animate-charcter-history text-5xl pt-4 font-black">
+    <p class="shadow-9xl animate-charcter-history text-5xl pt-12 font-black">
       What's on menu today?
     </p>
   </div>
-  <div class="flex-col">
+  <div class="flex-col py-7">
     <div class="flex justify-center flex-col">
-      <Food
-        class="mb-12 flex justify-center fade-in"
-        :name="foods[i].name"
-        :calorie="foods[i].calorie"
-        :image="foods[i].image"
-      ></Food>
+      <span class="flex-1">
+        <Food
+          class="mb-12 flex justify-center fade-in"
+          :name="foods[i].name"
+          :calorie="foods[i].calorie"
+          :image="foods[i].image"
+        ></Food>
+      </span>
+      <span class="flex justify-center ">
+        <p>your calorie : {{ informationUser.myCalorie }}</p>
+      </span>
     </div>
 
     <div class="bottom-position">
-      <div class="flex justify-evenly py-4">
-        <font-awesome-icon
-          class="text-5xl text-white pt-4 hover:scale-125 ease-in duration-100"
-          icon="fa-solid fa-thumbs-down"
-        />
-        <button
-          @click="skip"
-          class="button-beauty-skip text-white font-bold py-2 px-4 rounded-full"
-        >
-          SKIP
-        </button>
-        <button
-          @click="eat"
-          class="button-beauty-eat text-white font-bold py-2 px-4 rounded-full"
-        >
-          EAT
-        </button>
-        <font-awesome-icon
-          class="text-5xl text-white pt-2 hover:scale-125 ease-in duration-100"
-          icon="fa-solid fa-thumbs-up"
-        />
+      <div class="flex justify-center py-10">
+        <div class="mt-2">
+          <button
+            @click="skip"
+            class="text-4xl button-beauty-skip text-white font-bold py-2 px-4 rounded-full"
+          >
+            SKIP
+          </button>
+        </div>
+
+        <div class="px-12 mt-2">
+          <button
+            @click="eat"
+            class="text-4xl button-beauty-eat text-white font-bold py-2 px-4 rounded-full"
+          >
+            EAT
+          </button>
+        </div>
+
+        <div class="text-center w-24 h-24 bg-lime-600 rounded-full">
+          <font-awesome-icon
+            @click="increaseLike"
+            class="text-5xl mt-5 text-white scale-100 hover:scale-125 ease-in duration-100"
+            icon="fa-solid fa-thumbs-up"
+          />
+        </div>
       </div>
 
       <div class="flex justify-evenly p-1">
@@ -87,7 +97,6 @@
           >
             Close
           </button>
-
         </div>
       </div>
     </div>
@@ -145,6 +154,16 @@ export default {
     this.foods = useFoodStore().getRandFood;
   },
   methods: {
+    increaseLike() {
+      this.foods[this.i].like++;
+      this.updateFoodLike();
+      this.foods[this.i].foodID;
+    },
+    async updateFoodLike() {
+      await updateDoc(doc(db, "foods", this.foods[this.i].foodID), {
+        like: this.foods[this.i].like,
+      });
+    },
     accept() {
       this.overCalorie = false;
     },
@@ -156,9 +175,10 @@ export default {
       }
     },
     eat() {
-    console.log("befor",this.leftCalorie);
+      console.log("befor", this.leftCalorie);
       if (this.leftCalorie - this.foods[this.i].calorie < 0) {
         this.overCalorie = true;
+        return;
       }
       this.trackFood.push(this.foods[this.i].foodID);
       console.log(this.trackFood);
@@ -169,9 +189,9 @@ export default {
         this.i = 0;
       }
       this.leftCalorie = this.leftCalorie - this.foods[this.i].calorie;
-      console.log("after",this.leftCalorie);
+      console.log("after", this.leftCalorie);
     },
-    
+
     async pushTrack() {
       // push add field information to database
       const auth = getAuth();
@@ -193,9 +213,34 @@ export default {
 </script>
 
 <style scoped>
+
+.content {
+  background-color: #f5f5f5;
+  height: 10vh;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#content-info {
+  position: relative;
+  top: 40px;
+  border: 1px solid lightgray;
+  padding: 3rem 2rem;
+  background: #fefefe;
+}
+
+.center-icon {
+  border: 5px solid;
+  display: flex;
+  justify-content: center;
+}
+
 .bottom-position {
   position: absolute;
-  bottom: 50px;
+  bottom: 60px;
   width: 100%;
 }
 
@@ -207,7 +252,6 @@ export default {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
 }
@@ -224,7 +268,6 @@ export default {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
 }
@@ -238,7 +281,7 @@ export default {
   border: none;
   color: white;
   padding: 15px 32px;
-  font-size: 16px;
+  font-size: 28px;
   margin: 4px 2px;
   cursor: pointer;
 }

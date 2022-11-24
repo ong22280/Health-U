@@ -7,6 +7,11 @@
                 <h2 class="mb-3 text-3xl text-center">You information</h2>
 
                 <div class="input">
+                    <label for="name">Name</label>
+                    <input class="form-control" type="text" v-model="name" name="name" />
+                </div>
+
+                <div class="input">
                     <label for="age">Age</label>
                     <input class="form-control" type="number" v-model="age" name="age" />
                 </div>
@@ -102,6 +107,7 @@ export default {
                 gender: this.gender,
                 allergic: this.allergic,
                 myCalorie: this.myCalorie,
+                leftCalorie: this.myCalorie,
             });
             this.$router.push("/home");
         },
