@@ -1,6 +1,7 @@
 <template>
     <Navbar/>
  <div class="flex-col">
+    <!-- <multiselect v-model="selected" :options="options"></multiselect> -->
     <div class="text-white text-5xl ml-16 my-3">Tell us what you ate ?</div>
     <div class="flex justify-center">
         <div class="flex-col py-20 px-24 bg-white rounded-md shadow-lg">
@@ -11,10 +12,21 @@
             class="inputTextField"
             name="protein"
             />
-            <select name="" id="" multiple>
-                <option value="1">one</option>
-                <option value="2">two</option>
-            </select>
+            <div>
+            <!-- <VueMultiselect
+            v-model="data"
+            :options="source"
+            :multiple="true"
+            :close-on-select="true"
+            placeholder="Pick some"
+            label="name"
+            track-by="name"
+            /> -->
+            <!-- <VueMultiselect 
+            v-model="selected"
+            :options="options"/> -->
+            <!-- <multiselect v-model="selected" :options="options"></multiselect> -->
+            </div>
             <label for="carb" class="text-xl">Carbohydrate</label>
             <input type="text" 
             class="inputTextField"
@@ -40,18 +52,33 @@
 
 <script>
 import Navbar from "../components/Navbar.vue"
+import Multiselect from 'vue-multiselect'
 export default {
     components:{
     Navbar,
+    // VueMultiselect,
+    Multiselect
+    },
+    data () {
+    return {
+    //   value: [],
+    //   options: [
+    //     { name: 'Vue.js', language: 'JavaScript' },
+    //     { name: 'Adonis', language: 'JavaScript' },
+    //     { name: 'Rails', language: 'Ruby' },
+    //     { name: 'Sinatra', language: 'Ruby' },
+    //     { name: 'Laravel', language: 'PHP' },
+    //     { name: 'Phoenix', language: 'Elixir' }
+    //   ]      
+        selected: null,
+      options: ['list', 'of', 'options']
+
     }
+    
+}
 }
 </script>
 
 <style>
-home-btn{
-    @apply
-    px-0
-    py-3
-}
 
 </style>

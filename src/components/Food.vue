@@ -1,21 +1,47 @@
 <template>
- <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-    <a href="#">
-        <img class="rounded-t-lg" src="https://img.freepik.com/free-photo/colorful-fruits-tasty-fresh-ripe-juicy-white-desk_179666-169.jpg?w=2000" alt="" />
-    </a>
-    <div class="p-5">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Noteworthy technology acquisitions 2021</h5>
-        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
+
+    <div class="mb-12 flex justify-center">
+
+        <div class=" container  shadow-2xl rounded-xl fade-in" id="content-food"
+            style="width: 48rem; max-width: 80%;">
+            <img :src="image" class="card-img-top rounded-xl shadow-2xl w-full">
+            <div class="">
+                <h5 class="card-title font-black text-3xl">{{ name }}</h5>
+                <span class="font-bold text-2xl">calorie : </span>
+                <span class="font-semibold text-2xl">{{ calorie }}</span>
+            </div>
+        </div>
+
     </div>
-</div> 
+
 </template>
 
 <script>
 export default {
+    props: {
+        name: {
+            type: String,
+            default: 'Food Name'
+        },
+        calorie: {
+            type: String,
+            default: 'Calorie'
+        },
+        image: {
+            type: String,
+            default: 'https://www.lays.com/sites/lays.com/files/2020-11/lays-Classic-small.jpg'
+        }
+    },
 
 }
 </script>
 
-<style>
-
+<style scoped>
+#content-food {
+  position: relative;
+  top: 40px;
+  border: 1px solid lightgray;
+  padding: 3rem 2rem;
+  background: #fefefe;
+}
 </style>

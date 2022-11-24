@@ -23,28 +23,28 @@
               Hello, {{userName}}
             </div>
           </div>
-          <div class="relative top-[-10%]">
-            <div class="flex flex-col items-center mb-[3%]">
-              <div class="relative text-[20px]">
-                Personal Infomation
-              </div>
-              <div id="infoBox" class=" bg-slate-400 h-fit w-[20%] p-[2%] rounded-lg" @mouseover="showEditInfo(true)" @mouseleave="showEditInfo(false)">
-                <div id="info" class="text-white flex-col space-y-[3%]">
-                  <div class="shadow-lg flex p-[2%]">
-                    <div class="basis-1/2">
-                      Height : 
-                    </div>
-                    <div class="basis-1/2 text-right">
-                      {{height}} cm
-                    </div>
+        </div>
+        <div class="relative top-[-10%]">
+          <div class="flex flex-col items-center mb-[3%]">
+            <div class="relative text-[20px]">
+              Personal Infomation
+            </div>
+            <div class=" bg-slate-400 h-fit w-[20%] p-[2%] rounded-lg">
+              <div class="text-white flex-col space-y-[3%]">
+                <div class="shadow-lg flex p-[2%]">
+                  <div class="basis-1/2">
+                    Height :
                   </div>
-                  <div class="shadow-lg flex p-[2%]">
-                    <div class="basis-1/2">
-                      Weight :
-                    </div>
-                    <div class="basis-1/2 text-right">
-                      {{weight}} kg
-                    </div>
+                  <div class="basis-1/2 text-right">
+                    {{ informationUser.height }} cm
+                  </div>
+                </div>
+                <div class="shadow-lg flex p-[2%]">
+                  <div class="basis-1/2">
+                    Weight :
+                  </div>
+                  <div class="basis-1/2 text-right">
+                    {{ informationUser.weight }} kg
                   </div>
                   <div class="shadow-lg flex p-[2%]">
                     <div class="basis-1/2">
@@ -72,32 +72,34 @@
                     </button>
                 </div>
               </div>
+
             </div>
-            <div class="">
-              <canvas id = "myChart" class="w-[50%]"></canvas>
-            </div>
-            <div class="mt-[30px] text-center text-[20px]">
-              Target Calories / Day : 
-            </div>
-            <div class="text-center text-[20px] mt-[25px]">
-              Current Calories / Day :
-            </div>
-            <div class="text-center text-[20px] mt-[25px]">
-              Calories till reach target :
-            </div>
+          </div>
+          <div class="">
+            <canvas id="myChart" class="w-[50%]"></canvas>
+          </div>
+          <div class="mt-[30px] text-center text-[20px]">
+            Target Calories / Day :
+          </div>
+          <div class="text-center text-[20px] mt-[25px]">
+            Current Calories / Day :
+          </div>
+          <div class="text-center text-[20px] mt-[25px]">
+            Calories till reach target :
           </div>
         </div>
       </div>
     </div>
-    
-  </template>
-  
+
+</template>
+
 <script>
+import { useUserInfoStore } from '../stores/userInfo.js'
 import Navbar from '../components/Navbar.vue';
 import Chart from 'chart.js/';
 
 export default {
-  data(){
+  data() {
     return {
       image : "https://scontent.fbkk5-4.fna.fbcdn.net/v/t39.30808-6/306148111_1880034558867492_7239761071913403261_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=09cbfe&_nc_eui2=AeEoF0YqNgK8AB2DTFgx2sNe3vZh_X94_pHe9mH9f3j-kYWzRkPEDIBGgSm7ar7PiQSRm8tCygSvk6Jrhui3u3fd&_nc_ohc=Yj3xcRYEa8gAX8I8Tet&_nc_ht=scontent.fbkk5-4.fna&oh=00_AfCWHJb6PfuP02Qf1GpfpbN0JwEcynbVtAkQTVgPOaVgLw&oe=63842DB6",
       imageNo : 1,
@@ -111,14 +113,21 @@ export default {
       weight : 0,
       bmi : 0,
       editInfoBox : 0,
-      userName : "World"
+      userName : "World",
+      informationUser: [],
     }
   },
+  async created() {
+    await useUserInfoStore().fetchInformationUser()
+    this.informationUser = useUserInfoStore().informationUser
+  },
+
   components: {
     Navbar,
   },
-  methods : {
-    showEditBg(bool){
+
+  methods: {
+    showEditBg(bool) {
       let editBg = document.querySelector("#editBg");
       if (bool) {
         editBg.classList.remove("opacity-0");
@@ -216,13 +225,13 @@ export default {
     }
   },
   
-  mounted(){
+  mounted() {
     const ctx = document.getElementById('myChart');
 
     const myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday','Sunday'],
+        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
         datasets: [{
           label: 'Calories per day',
           data: [12, 19, 3, 5, 2, 3, 30],
@@ -235,14 +244,14 @@ export default {
         scales: {
           y: {
             beginAtZero: true,
-            max : 300,
+            max: 300,
           }
         },
-        layout : {
-          padding : {
-            top : 0,
-            left : 100,
-            right : 100,
+        layout: {
+          padding: {
+            top: 0,
+            left: 100,
+            right: 100,
           },
         }
       },
@@ -262,4 +271,5 @@ export default {
 .theme-text {
   color: rgb(v-bind(r),v-bind(g),v-bind(b));
 }
+
 </style>
