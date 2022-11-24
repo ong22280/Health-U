@@ -18,7 +18,8 @@
         :calorie="foods[i].calorie"
         :image="foods[i].image"
       ></Food>
-    </div> -->
+      <HelloWorld />
+    </div>
 
 
 
@@ -39,6 +40,7 @@ export default {
   components: {
     Navbar,
     Food,
+    HelloWorld,
   },
   data() {
     return {
