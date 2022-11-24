@@ -24,11 +24,13 @@ export const useFoodStore = defineStore("foods", {
       const queryData = querySnapshot.docs.map((doc) => doc.data());
       // console.log(queryData);
       queryData.forEach((doc) => {
-        if (!allergic.includes(doc.name)) {
-          this.foods.push(doc);
-        }
+        this.foods.push(doc);
       });
-      // console.log(this.foods[0].name);
+      // sort by like
+      this.foods.sort((a, b) => {
+        return b.like - a.like;
+      });
+      console.log(this.foods[0].name);
     },
   },
 });
