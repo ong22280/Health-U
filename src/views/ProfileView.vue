@@ -10,7 +10,7 @@
           </button>
         </div>
         <div class="min-h-fit w-[68%] bg-white">
-          <div class="relative left-[10%] top-[-10%] h-fit w-[70%] flex items-center space-x-[5%]">
+          <div class="relative left-[10%] top-[-7%] h-fit w-[70%] flex items-center space-x-[5%]">
             <div class="rounded-full bg-white w-[70%] h-[70%] border-slate-900 border-3 overflow-hidden" @mouseover="showEditImage(true)" @mouseout="showEditImage(false)">
               <img :src=image alt="profile.png">
             </div>
@@ -23,8 +23,7 @@
               Hello, {{userName}}
             </div>
           </div>
-        </div>
-        <div class="relative top-[-10%]">
+          <div class="relative top-[-10%]">
           <div class="flex flex-col items-center mb-[3%]">
             <div class="relative text-[20px]">
               Personal Infomation
@@ -46,6 +45,8 @@
                   <div class="basis-1/2 text-right">
                     {{ informationUser.weight }} kg
                   </div>
+                </div>
+                <div>
                   <div class="shadow-lg flex p-[2%]">
                     <div class="basis-1/2">
                       BMI :
@@ -88,6 +89,8 @@
             Calories till reach target :
           </div>
         </div>
+        </div>
+        
       </div>
     </div>
 
