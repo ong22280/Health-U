@@ -18,6 +18,7 @@
         :calorie="foods[i].calorie"
         :image="foods[i].image"
       ></Food>
+      <HelloWorld />
     </div>
 
 
@@ -30,6 +31,7 @@
 
 <script>
 import { useFoodStore } from "../stores/randFood.js";
+import HelloWorld from "../components/HelloWorld.vue";
 import Navbar from "../components/Navbar.vue";
 import Food from "../components/Food.vue";
 
@@ -37,6 +39,7 @@ export default {
   components: {
     Navbar,
     Food,
+    HelloWorld,
   },
   data() {
     return {
