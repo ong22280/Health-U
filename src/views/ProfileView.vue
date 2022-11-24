@@ -83,10 +83,7 @@
             Target Calories / Day : {{ informationUser.myCalorie }} kcal
           </div>
           <div class="text-center text-[20px] mt-[25px]">
-            Current Calories / Day : {{ informationUser.leftCalorie }} kcal
-          </div>
-          <div class="text-center text-[20px] mt-[25px]">
-            Calories till reach target :
+            Calories till reach target : {{ informationUser.leftCalorie }} kcal
           </div>
         </div>
         </div>
