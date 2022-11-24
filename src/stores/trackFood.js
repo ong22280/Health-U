@@ -5,9 +5,7 @@ import { useUserInfoStore } from "./userInfo.js";
 
 await useUserInfoStore().fetchInformationUser();
 const informationUser = useUserInfoStore().informationUser;
-console.log(informationUser);
-const foodList = informationUser.trackFood;
-console.log(foodList);
+const trackFoods = informationUser.trackFood;
 
 export const trackFoodStore = defineStore("foods", {
   state: () => ({
@@ -20,12 +18,11 @@ export const trackFoodStore = defineStore("foods", {
   },
   actions: {
     async fetchTrackFood() {
-      console.log('foodList', foodList)
       this.trackFood = [];
       const queryData = query(collection(db, "foods"));
       const querySnapshot = await getDocs(queryData);
       querySnapshot.forEach((doc) => {
-        if (foodList.includes(doc.id)) {
+        if (trackFoods.includes(doc.id)) {
           this.trackFood.push(doc.data());
         }
       });
