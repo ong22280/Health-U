@@ -5,28 +5,30 @@ import { useUserInfoStore } from "./userInfo.js";
 
 await useUserInfoStore().fetchInformationUser();
 const informationUser = useUserInfoStore().informationUser;
-console.log(informationUser);
-const foodList = informationUser.trackFood;
-console.log(foodList);
+console.log("show like food in likeFood",informationUser.likeFoods);
 
-export const trackFoodStore = defineStore("foods", {
+const foodList = informationUser.likeFoods;
+
+export const useLikeFoodStore = defineStore("foods", {
   state: () => ({
-    trackFood: [],
+    likeFood: [],
   }),
   getters: {
-    getTrackFood: (state) => {
-      return state.trackFood;
+    getLikeFood: (state) => {
+      return state.likeFood;
     },
   },
   actions: {
-    async fetchTrackFood() {
+    async fetchLikeFood() {
+      console.log("in likeFood")
       console.log('foodList', foodList)
-      this.trackFood = [];
+      this.likeFood = [];
       const queryData = query(collection(db, "foods"));
       const querySnapshot = await getDocs(queryData);
       querySnapshot.forEach((doc) => {
         if (foodList.includes(doc.id)) {
-          this.trackFood.push(doc.data());
+            console.log(doc.data())
+            this.likeFood.push(doc.data());
         }
       });
     },

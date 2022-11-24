@@ -19,6 +19,7 @@ export const useFoodStore = defineStore("foods", {
   },
   actions: {
     async fetchFood() {
+      console.log("in randfood")
       const q = query(collection(db, "foods"));
       const querySnapshot = await getDocs(q);
       const queryData = querySnapshot.docs.map((doc) => doc.data());

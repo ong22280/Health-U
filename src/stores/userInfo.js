@@ -25,7 +25,7 @@ export const useUserInfoStore = defineStore("users", {
           this.informationUser = doc.data();
           this.trackFood = doc.data().trackFood;
           this.likeFood = doc.data().likeFood;
-          this.allergic = doc.data().allergic;
+          this.allergic = doc.data().likeFood;
         }
       });
     },

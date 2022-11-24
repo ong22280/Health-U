@@ -12,13 +12,13 @@
   </div>
   <div class="flex-col">
 
-    <div class="flex justify-center flex-col">
+    <!-- <div class="flex justify-center flex-col">
       <Food @click="incrementI" class="mb-12 flex justify-center" 
         :name="foods[i].name" 
         :calorie="foods[i].calorie"
         :image="foods[i].image"
       ></Food>
-    </div>
+    </div> -->
 
 
 
@@ -29,9 +29,11 @@
 </template>
 
 <script>
-import { useFoodStore } from "../stores/randFood.js";
-import Navbar from "../components/Navbar.vue";
-import Food from "../components/Food.vue";
+import { useFoodStore } from "@/stores/randFood.js";
+import { RecommendFood } from "@/services/recommend";
+import { useLikeFoodStore } from '@/stores/likeFood'
+import Navbar from "@/components/Navbar.vue";
+import Food from "@/components/Food.vue";
 
 export default {
   components: {
@@ -42,12 +44,21 @@ export default {
     return {
       foods: [],
       i: 0,
+      likeFood: [],
     };
   },
   async created() {
+    console.log("Home Create")
     await useFoodStore().fetchFood();
     this.foods = useFoodStore().getRandFood;
     console.log(this.foods[0].name);
+
+    await useLikeFoodStore().fetchLikeFood();
+    this.likeFood = useLikeFoodStore().getLikeFood;
+    console.log("likeFood: ", this.likeFood)
+  },
+  async mounted(){
+    console.log("home mounted")
   },
   methods: {
     incrementI() {

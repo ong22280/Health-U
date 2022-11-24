@@ -1,6 +1,3 @@
-import { trackFoodStore } from '../stores/trackFood.js';
-import { useUserInfoStore } from '../stores/userInfo'
-
 // const foodList = [
 //     { name: "Egg" ,foods: ["friedEgg", "omlete", "friedRice"] },
 //     { name: "Pork" ,foods: ["kaprow", "KT", "friedRice"] },
@@ -8,8 +5,9 @@ import { useUserInfoStore } from '../stores/userInfo'
 //     { name: "Noodle" ,foods: ["KT", "padthai", "ps"] },
 
 // ]
-let 
-let likeFood = ["padthai", "omlete"]
+
+// let likeFood = ["padthai", "omlete"]
+export function RecommendFood(foodList, likeFood){
 let likeIn = [], recommend=[]
 //get foods
 
@@ -30,3 +28,5 @@ likeIn.map( ing =>{
 console.log("\nBefore unique :\n",recommend)
 let recommendation =  [...new Set(recommend)];
 console.log("\nafter filter\n", recommendation)
+
+}
