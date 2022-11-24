@@ -25,6 +25,8 @@ export const useFoodStore = defineStore("foods", {
       const queryData = querySnapshot.docs.map((doc) => doc.data());
       // console.log(queryData);
       queryData.forEach((doc) => {
+        console.log("show doc", doc)
+        if( !(doc.foodID==="gXaFsWy9qVaAM9nxZp6z"))
         this.foods.push(doc);
       });
       // sort by like
