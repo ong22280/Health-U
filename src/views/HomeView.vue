@@ -138,6 +138,7 @@ export default {
     this.informationUser = useUserInfoStore().informationUser;
     this.myCalorie = this.informationUser.myCalorie;
     this.leftCalorie = this.informationUser.leftCalorie;
+    this.trackFood = this.informationUser.trackFood;
     console.log(this.leftCalorie);
 
     await useFoodStore().fetchFood();

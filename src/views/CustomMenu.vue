@@ -4,41 +4,58 @@
     <!-- <multiselect v-model="selected" :options="options"></multiselect> -->
     <div class="flex justify-center mx-10">
       <p class="shadow-9xl animate-charcter-history text-5xl p-4 font-black">
-        What's on menu today?
+        Tell us what you eat?
       </p>
     </div>
     <div class=" flex justify-center">
       <div class=" flex-col py-20 px-24 bg-white rounded-md shadow-lg">
         <p class="text-3xl mb-5">Create you own menu</p>
+        <div class="mb-5">
         <label for="protein" class="text-xl">Protein</label>
-        <input type="text" class="inputTextField" name="protein" />
-        <div>
-          <!-- <VueMultiselect
-            v-model="data"
-            :options="source"
-            :multiple="true"
-            :close-on-select="true"
-            placeholder="Pick some"
-            label="name"
-            track-by="name"
-            /> -->
-          <!-- <VueMultiselect 
-            v-model="selected"
-            :options="options"/> -->
-          <!-- <multiselect v-model="selected" :options="options"></multiselect> -->
-        </div>
-        <label for="carb" class="text-xl">Carbohydrate</label>
-        <input type="text" class="inputTextField" name="carb" />
-        <label for="fat" class="text-xl">Fat</label>
-        <input type="text" class="inputTextField" name="fat" />
-        <div class="flex justify-end">
-          <input
-            type="button"
-            name="submit"
-            id=""
-            value="Submit"
-            class="px-5 py-3 bg-gray-200 rounded-md scale-100 shadow-sm hover:scale-105"
+          <Multiselect 
+          v-model="proteinSelect"
+          :multiple="true"
+          :options="options1"
+          label="name"
+          track-by="name"
           />
+
+        </div>
+        <div class="mb-5">
+        <label for="carb" class="text-xl">Carbohydrate</label>
+          <Multiselect 
+          v-model="carbSelect"
+          :multiple="true"
+          :options="options2"
+          label="name"
+          track-by="name"
+          />
+        </div>
+        <div class="mb-5">
+        <label for="fat" class="text-xl">Fat</label>
+          <Multiselect 
+          v-model="fatSelect"
+          :multiple="true"
+          :options="options3"
+          label="name"
+          track-by="name"
+          />
+        </div>
+        <div class="mb-5 text-center text-2xl">
+          <p class="text-2xl">Total Calories</p> 
+          <p class="text-2xl">{{ totalCalories }}</p>
+        </div>
+        <div class="flex justify-end">
+          <button
+            @click="calculate"
+            class="px-5 py-3 bg-gray-200 rounded-md scale-100 shadow-sm hover:scale-105 mr-52"
+           >Calculate</button>
+          <button
+            @click="submit"
+           class="px-5 py-3 bg-gray-200 rounded-md scale-100 shadow-sm hover:scale-105"
+          >
+            Submit
+          </button>
         </div>
       </div>
     </div>
@@ -48,29 +65,84 @@
 <script>
 import Navbar from "../components/Navbar.vue";
 import { useUserInfoStore } from '../stores/userInfo'
+import { Multiselect } from "vue-multiselect";
+import { db } from "../main.js";
+import { updateDoc ,doc} from '@firebase/firestore';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
-import Multiselect from "vue-multiselect";
 export default {
   components: {
     Navbar,
-    // VueMultiselect,
     Multiselect,
   },
   data() {
     return {
-      //   value: [],
-      //   options: [
-      //     { name: 'Vue.js', language: 'JavaScript' },
-      //     { name: 'Adonis', language: 'JavaScript' },
-      //     { name: 'Rails', language: 'Ruby' },
-      //     { name: 'Sinatra', language: 'Ruby' },
-      //     { name: 'Laravel', language: 'PHP' },
-      //     { name: 'Phoenix', language: 'Elixir' }
-      //   ]
-      selected: null,
-      options: ["list", "of", "options"],
+        options1: [
+          {name: "Egg", calorie: 72},
+          {name: "Pork", calorie: 200},
+          {name: "Chicken", calorie: 100},
+          {name: "Beef", calorie: 250},
+        ],
+        options2: [
+          {name: "Rice", calorie: 150},
+          {name: "Bun", calorie: 120},
+          {name: "Noodle", calorie: 300},
+          {name: "Flour", calorie: 365},
+        ],
+        options3: [
+          {name: "Oil", calorie: 120},
+          {name: "Butter", calorie: 102},
+          {name: "Cheese", calorie: 350},
+
+        ],
+      proteinSelect: [],
+      carbSelect: [],
+      fatSelect: [],
+      totalCalories: 0,
+      trackFood: [],
+      informationUser: [],
+      leftCalorie: 0,
     };
   },
+  async created(){
+    await useUserInfoStore().fetchInformationUser();
+    this.informationUser = useUserInfoStore().informationUser;
+    this.trackFood = this.informationUser.trackFood;
+    this.leftCalorie = this.informationUser.leftCalorie;
+
+  },
+  methods:{
+    calculate(){
+      this.totalCalories=0
+      this.proteinSelect.forEach(food=>{
+        this.totalCalories += food.calorie;
+      })
+      this.carbSelect.forEach(food=>{
+        this.totalCalories += food.calorie;
+      })
+      this.fatSelect.forEach(food=>{
+        this.totalCalories += food.calorie;
+      })
+      this.leftCalorie -= this.totalCalories
+    },
+   async submit(){
+    console.log("submit")
+    this.trackFood.push("gXaFsWy9qVaAM9nxZp6z")
+    console.log("after add custom", this.trackFood)
+      //update Calorie
+      await updateDoc(doc(db,"foods", "gXaFsWy9qVaAM9nxZp6z"),{
+        calorie: this.totalCalories,
+      }); 
+      //update trackFood
+      const auth = getAuth();
+      const user = auth.currentUser;
+      console.log("log left cal", this.leftCalorie);
+      await updateDoc(doc(db, "users", user.uid), {
+        trackFood: this.trackFood,
+        leftCalorie: this.leftCalorie,
+      });
+}
+  }
 };
 </script>
 
@@ -102,3 +174,4 @@ export default {
 }
 
 </style>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
