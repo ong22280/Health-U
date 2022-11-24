@@ -12,13 +12,15 @@
   </div>
   <div class="flex-col">
 
-    <!-- <div class="flex justify-center flex-col">
-      <Food @click="incrementI" class="mb-12 flex justify-center" 
+     <div class="flex justify-center flex-col">
+      <!-- <VueMultiselect/> -->
+      <!-- <Food @click="incrementI" class="mb-12 flex justify-center" 
         :name="foods[i].name" 
         :calorie="foods[i].calorie"
         :image="foods[i].image"
       ></Food>
-      <HelloWorld />
+      <HelloWorld /> -->
+      
     </div>
 
 
@@ -35,12 +37,13 @@ import { RecommendFood } from "@/services/recommend";
 import { useLikeFoodStore } from '@/stores/likeFood'
 import Navbar from "@/components/Navbar.vue";
 import Food from "@/components/Food.vue";
+import VueMultiselect from "../components/Multiselect.vue";
 
 export default {
   components: {
     Navbar,
     Food,
-    HelloWorld,
+    VueMultiselect,
   },
   data() {
     return {
