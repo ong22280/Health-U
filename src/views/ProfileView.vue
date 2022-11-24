@@ -26,17 +26,17 @@
           </div>
           <div class="relative top-[-10%]">
           <div class="flex flex-col items-center mb-[3%]">
-            <div class="relative text-[20px]">
+            <div class="relative text-[30px]">
               Personal Infomation
             </div>
-            <div class=" bg-slate-400 h-fit w-[20%] p-[2%] rounded-lg" @mouseover="showEditInfo(true)" @mouseleave="showEditInfo(false)">
-              <div id ="info" class="text-white flex-col space-y-[3%]">
+            <div class=" bg-slate-400 h-fit w-[30%] p-[2%] rounded-lg" @mouseover="showEditInfo(true)" @mouseleave="showEditInfo(false)">
+              <div id ="info" class="text-white flex-col space-y-[3%] text-[20px]">
                 <div class="shadow-lg flex p-[2%]">
                   <div class="basis-1/2">
                     Height :
                   </div>
                   <div class="basis-1/2 text-right">
-                    {{ informationUser.height }} cm
+                    {{ height }} cm
                   </div>
                 </div>
                 <div class="shadow-lg flex p-[2%]">
@@ -44,7 +44,7 @@
                     Weight :
                   </div>
                   <div class="basis-1/2 text-right">
-                    {{ informationUser.weight }} kg
+                    {{ weight }} kg
                   </div>
                 </div>
                 <div>
@@ -53,20 +53,20 @@
                       BMI :
                     </div>
                     <div class="basis-1/2 text-right">
-                      {{bmi}}
+                      {{ bmi }}
                     </div>
                   </div>
                 </div>
               </div>
-              <div id="editInfo" class="text-white flex-col d-none">
-                <label for="name">Name :</label>
-                <input type="text" name="name" value={{userName}} class="text-slate-500">
-                <label for="height">Height :</label>
-                <input type="number" name="height" value="{{this.height}}" class="text-slate-500">
-                <label for="weight">Weight :</label>
-                <input type="number" name="weight" value="{{this.weight}}" class="text-slate-500">
-                <label for="bmi">BMI :</label>
-                <input type="number" name="bmi" value="{{this.bmi}}" class="text-slate-500">
+              <div id="editInfo" class="text-white text-[20px] flex-col d-none">
+                <div class="flex-col">
+                  <label for="height" class="basis2/3 mr-[20px]">Height :</label>
+                  <input type="number" name="height" value="{{this.height}}" class="text-slate-500 basis-1/3">
+                </div>
+                <div class="flex-col">
+                  <label for="weight" class="basis2/3 mr-[16px]">Weight :</label>
+                  <input type="number" name="weight" value="{{this.weight}}" class="text-slate-500 basis-1/3 ">
+                </div>
                 <button class="bg-white text-slate-500 p-[2%] text-[75%] rounded-md mt-[4%]" @click="saveInfo()">Save</button>
               </div>
               <div id="showEditInfo" class="text-center pt-[3%] d-none">
@@ -83,10 +83,7 @@
             Target Calories / Day : {{ informationUser.myCalorie }} kcal
           </div>
           <div class="text-center text-[20px] mt-[25px]">
-            Current Calories / Day : {{ informationUser.leftCalorie }} kcal
-          </div>
-          <div class="text-center text-[20px] mt-[25px]">
-            Calories till reach target :
+            Calories till reach target : {{ informationUser.leftCalorie }} kcal
           </div>
         </div>
         </div>
@@ -113,15 +110,18 @@ export default {
       userInformation : [],
       height : 0,
       weight : 0,
-      bmi : 0,
       editInfoBox : 0,
-      userName : "World",
+      userName : "Ong",
       informationUser: [],
     }
   },
   async created() {
     await useUserInfoStore().fetchInformationUser()
     this.informationUser = useUserInfoStore().informationUser
+    this.height = this.informationUser.height
+    this.weight = this.informationUser.weight
+    this.bmi = this.weight / (this.height / 100)
+    this.bmi = this.bmi.toFixed(2)
   },
 
   components: {
@@ -172,23 +172,21 @@ export default {
       }
     },
     saveInfo(){
-      let userName = document.querySelector("input[name=name]").value;
       let height = document.querySelector("input[name=height]").value;
       let weight = document.querySelector("input[name=weight]").value;
-      let bmi = document.querySelector("input[name=bmi]").value;
       let info = document.querySelector("#info");
       let editInfo = document.querySelector("#editInfo");
       let editButton = document.querySelector('#editButton');
 
-      if (height == "" || weight == "" || bmi == "" || userName == ""){
+      if (height == "" || weight == ""){
         return
       }
       this.editInfoBox = 0;
 
-      this.userName = userName;
       this.height = height;
       this.weight = weight;
-      this.bmi = bmi;
+      this.bmi = this.weight / (this.height / 100)
+      this.bmi = this.bmi.toFixed(2)
 
       editButton.classList.remove('d-none')
       editInfo.classList.add('d-none')
@@ -229,34 +227,45 @@ export default {
   
   mounted() {
     const ctx = document.getElementById('myChart');
-
+    const option = {
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 300,
+        }
+      },
+      layout: {
+        padding: {
+          top: 0,
+          left: 100,
+          right: 100,
+        },
+      },
+      annotation: {
+        annotations: [{
+            type: 'line',
+            mode: 'horizontal',
+            scaleID: 'y-axis-0',
+            value: 2000,
+            borderColor: 'tomato',
+            borderWidth: 1
+        }],
+        drawTime: "afterDraw" // (default)
+      }
+    }
     const myChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
         datasets: [{
           label: 'Calories per day',
-          data: [12, 19, 3, 5, 2, 3, 30],
+          data: [2022, 2340, 1670, 2105, 2555, 1740, 2100],
           backgroundColor : this.rgbToHex(this.r,this.g,this.b), 
           borderColor : "black",
           borderWidth: 2
         }]
       },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true,
-            max: 300,
-          }
-        },
-        layout: {
-          padding: {
-            top: 0,
-            left: 100,
-            right: 100,
-          },
-        }
-      },
+      options: option
     });
   }
 };
