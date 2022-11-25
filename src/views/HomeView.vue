@@ -17,8 +17,8 @@
           :image="foods[i].image"
         ></Food>
       </span>
-      <span class="flex justify-center ">
-        <p>your calorie : {{ informationUser.myCalorie }}</p>
+      <span class="flex justify-center text-white text-2xl mt-3">
+        <p>Your Calories : {{ this.leftCalorie }}</p>
       </span>
     </div>
 

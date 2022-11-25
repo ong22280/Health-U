@@ -77,6 +77,7 @@ import {
 export default {
     data() {
         return {
+            name: "",
             age: "",
             height: "",
             weight: "",
@@ -101,6 +102,7 @@ export default {
             const auth = getAuth();
             const user = auth.currentUser;
             await updateDoc(doc(db, "users", user.uid), {
+                name: this.name,
                 age: this.age,
                 height: this.height,
                 weight: this.weight,
@@ -108,6 +110,7 @@ export default {
                 allergic: this.allergic,
                 myCalorie: this.myCalorie,
                 leftCalorie: this.myCalorie,
+                trackFood: [],
             });
             this.$router.push("/home");
         },

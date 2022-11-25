@@ -122,6 +122,7 @@ export default {
     this.weight = this.informationUser.weight
     this.bmi = this.weight / (this.height / 100)
     this.bmi = this.bmi.toFixed(2)
+    this.userName = this.informationUser.name
   },
 
   components: {
